@@ -5,8 +5,9 @@ import (
 	"strconv"
 )
 
-var cCounter int = 0
-var contacts map[string]Contact
+var CCounter int = 0
+var Contacts map[string]Contact = make(map[string]Contact)
+// Contacts 
 
 type Contact struct {
 	FirstName 	string
@@ -16,80 +17,83 @@ type Contact struct {
 	Position 	string
 }
 
-func create(firstName, lastName, phone, email, position string) {
-	cCounter++
-	id := strconv.Itoa(cCounter)
-	contacts[id] = Contact{
+func Create(firstName, lastName, phone, email, position string) Contact {
+	CCounter++
+	id := strconv.Itoa(CCounter)
+	Contacts[id] = Contact{
 		firstName, 
 		lastName,
 		phone,
 		email,
 		position,
 	}
+	return Contacts[id]
 }
 
-func update(id, firstName, lastName, phone, email, position string) {
-	contacts[id] = Contact{
+func Update(id, firstName, lastName, phone, email, position string) Contact {
+	Contacts[id] = Contact{
 		firstName, 
 		lastName,
 		phone,
 		email,
 		position,
 	}
+	return Contacts[id]
 }
 
-func get(id string) Contact {
-	return contacts[id]
+func Get(id string) Contact {
+	return Contacts[id]
 }
 
-func getAll() map[string]Contact {
-	return contacts
+func GetAll() map[string]Contact {
+	return Contacts
 }
 
-func deleteContact(id string) {
-	delete(contacts, id)
+func DeleteContact(id string) Contact {
+	delete(Contacts, id)
+	return Contacts[id]
 }
 
 func main() {
-	contacts = make(map[string]Contact)
 	
-	create(
+	
+	fmt.Println(Create(
 		"John",
 		"Doe",
 		"+998707777777",
 		"johnny@example.com",
 		"Team Lead",
-	)
+	))
 
-	create(
+	fmt.Println(Create(
 		"Jane",
 		"Doe",
 		"+998906669966",
 		"janee@example.com",
 		"Product Manager",
-	)
+	))
 
-	create(
+	fmt.Println(Create(
 		"Mark",
 		"Marlin",
 		"+781223748899",
 		"markmarlin@example.com",
 		"Client",
-	)
+	))
 
-	fmt.Println(get("2"))
-	fmt.Println(getAll())
+	fmt.Println(Get("2"))
+	fmt.Println(GetAll())
 
-	update(
+	fmt.Println(Update(
 		"1",
 		"John",
 		"Doe",
 		"+888707777777",
 		"johnny@example.com",
 		"Team Lead",
-	)
+	))
 	
-	fmt.Println(get("1"))
-	deleteContact("3")
-	fmt.Println(getAll())
+	fmt.Println(Get("1"))
+	fmt.Println(DeleteContact("3"))
+	fmt.Println(GetAll())
 }
