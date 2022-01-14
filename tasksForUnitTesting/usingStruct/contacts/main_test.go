@@ -7,7 +7,6 @@ import (
 )
 
 func TestCraete(t *testing.T) {
-	// Conta = make(map[string]Contact)
 	CCounter = 0
 	expected := Contact{"FName", "LName", "+11100", "e@mai.l", "Position"}
 	actual := Create("FName", "LName", "+11100", "e@mai.l", "Position")
@@ -39,18 +38,10 @@ func TestGetAll(t *testing.T) {
 	Create("4FName", "LName", "+11100", "e@mai.l", "Position")
 
 	expected := map[string]Contact{
-		"1": {
-			"1FName", "LName", "+11100", "e@mai.l", "Position",
-		},
-		"2": {
-			"2FName", "LName", "+11100", "e@mai.l", "Position",
-		},
-		"3": {
-			"3FName", "LName", "+11100", "e@mai.l", "Position",
-		},
-		"4": {
-			"4FName", "LName", "+11100", "e@mai.l", "Position",
-		},
+		"1": {"1FName", "LName", "+11100", "e@mai.l", "Position"},
+		"2": {"2FName", "LName", "+11100", "e@mai.l", "Position"},
+		"3": {"3FName", "LName", "+11100", "e@mai.l", "Position"},
+		"4": {"4FName", "LName", "+11100", "e@mai.l", "Position"},
 	}
 	actual := GetAll()
 	assert.Equal(t, expected, actual, "Unexpected contact list")
